@@ -2,11 +2,15 @@
 
 namespace RulesEngine.Strategy.Concrete
 {
-    class DistinctOf : Evaluation
+    internal class DistinctOf : Evaluation
     {
-        public override bool Evaluate()
+        public override bool Evaluate<T>(T contrastValue)
         {
             return true;
+        }
+
+        public DistinctOf(object baseValue) : base(baseValue)
+        {
         }
     }
 }

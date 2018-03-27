@@ -1,7 +1,16 @@
-﻿namespace RulesEngine.Strategy.Abstract
+﻿using System.Collections.Generic;
+
+namespace RulesEngine.Strategy.Abstract
 {
     public abstract class Evaluation
     {
-        public abstract bool Evaluate();
+        public object baseValue;
+
+        protected Evaluation(object baseValue)
+        {
+            this.baseValue = baseValue;
+        }
+
+        public abstract bool Evaluate<T>(T contrastValue);
     }
 }

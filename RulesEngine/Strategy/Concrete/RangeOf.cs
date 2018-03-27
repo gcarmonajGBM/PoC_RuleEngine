@@ -7,8 +7,11 @@ namespace RulesEngine.Strategy.Concrete
 {
     class RangeOf : Evaluation
     {
+        public RangeOf(object baseValue) : base(baseValue)
+        {
+        }
 
-        public override bool Evaluate()
+        public override bool Evaluate<T>(T contrastValue)
         {
             return true;
         }

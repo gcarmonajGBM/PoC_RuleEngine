@@ -7,9 +7,13 @@ namespace RulesEngine.Strategy.Concrete
 {
     class BetweenOf : Evaluation
     {
-        public override bool Evaluate()
+        public override bool Evaluate<T>(T contrastValue)
         {
             return true;
+        }
+
+        public BetweenOf(object baseValue) : base(baseValue)
+        {
         }
     }
 

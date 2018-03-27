@@ -13,6 +13,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "dbRuleEngine", "dbRuleEngin
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "DependencyValidation", "DependencyValidation\DependencyValidation.modelproj", "{33D9FF07-0F7F-493A-9D32-E2F4D16B1DC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL_Engine", "DAL_Engine\DAL_Engine.csproj", "{4193171F-8180-47FF-B332-1BFB277C091C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{33D9FF07-0F7F-493A-9D32-E2F4D16B1DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D9FF07-0F7F-493A-9D32-E2F4D16B1DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D9FF07-0F7F-493A-9D32-E2F4D16B1DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4193171F-8180-47FF-B332-1BFB277C091C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4193171F-8180-47FF-B332-1BFB277C091C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4193171F-8180-47FF-B332-1BFB277C091C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4193171F-8180-47FF-B332-1BFB277C091C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

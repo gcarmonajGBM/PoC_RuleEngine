@@ -10,36 +10,34 @@ namespace RulesEngine.Entity
 {
     public class DimentionEntity
     {
-        public int RuleId { get; set; }
-        public int DimentionId { get; set; }
-        public List<DimentionEntity> ChildDimentions { get; set; }
-        public int ParentDimentionId { get; set; }
         public string DimentionColumn { get; set; }
-        public string Value { get; set; }
-
+        public double PercentageWeigth { get; set; }
         public Evaluation Evaluator { get; }
 
-        public DimentionEntity(int filterTypeId)
+        public List<DimentionEntity> ChildDimentions { get; set; }
+
+
+        public DimentionEntity(int filterTypeId, object baseValue)
         {
             switch (filterTypeId)
             {
-                case (int)OperationsAviable.Igual:
-                    Evaluator = new EqualsOf();
+                case (int)OperationsAviable.Equal:
+                    Evaluator = new EqualsOf(baseValue);
                     break;
-                case (int)OperationsAviable.Contiene:
-                    Evaluator = new ContainOf();
+                case (int)OperationsAviable.Contains:
+                    Evaluator = new ContainOf(baseValue);
                     break;
-                case (int)OperationsAviable.MayorIgual:
-                    Evaluator = new RangeOf();
+                case (int)OperationsAviable.GreaterEqual:
+                    Evaluator = new RangeOf(baseValue);
                     break;
-                case (int)OperationsAviable.MenorIgual:
-                    Evaluator = new RangeOf();
+                case (int)OperationsAviable.LessEqual:
+                    Evaluator = new RangeOf(baseValue);
                     break;
-                case (int)OperationsAviable.Entre:
-                    Evaluator = new BetweenOf();
+                case (int)OperationsAviable.Between:
+                    Evaluator = new BetweenOf(baseValue);
                     break;
-                case (int)OperationsAviable.Distinto:
-                    Evaluator = new DistinctOf();
+                case (int)OperationsAviable.Distinct:
+                    Evaluator = new DistinctOf(baseValue);
                     break;
                 default:
                     throw new ApplicationException("Filter type not support");

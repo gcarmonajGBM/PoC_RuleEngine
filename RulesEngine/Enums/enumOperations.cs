@@ -4,13 +4,13 @@ using System.Text;
 
 namespace RulesEngine.Enums
 {
-    enum OperationsAviable 
+    public enum OperationsAviable 
     {
-        Igual = 1,
-        Contiene = 2,
-        MayorIgual = 3,
-        MenorIgual = 4,
-        Entre = 5,
-        Distinto = 6
+        Equal = 1,
+        Contains = 2,
+        GreaterEqual = 3,
+        LessEqual = 4,
+        Between = 5,
+        Distinct = 6
     }
 }
