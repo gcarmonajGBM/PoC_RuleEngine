@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using RulesEngine.Entity;
 using RulesEngine.Enums;
@@ -10,15 +12,9 @@ namespace RulesEngine
 {
     public class Engine
     {
-        //private Evaluation evaluateValues;
-        //private List<DimentionEntity<int>> Rules;
+        private int internalRules;
 
-        //private DimentionEntity<int> objTest = new DimentionEntity<int>((int)OperationsAviable.Equal, 1);
-
-        //public void testMetod()
-        //{
-        //    objTest.Evaluator.Evaluate(1);
-        //}
+        //private int compliancePercentage;
 
         /*create stub for evaluate this*/
         public void GetcontractInfo()
@@ -37,14 +33,35 @@ namespace RulesEngine
 
         }
 
-        public IList DecorateDimentionEntity<T>(T itemList) where T : IList
+        public List<DimentionEntity<string>> DecorateDimentionEntity(List<ElementsDimentions> itemList, long? parentDimention = null)
         {
-            foreach (var item in itemList)
+            List<DimentionEntity<string>> listDimentionEntities = new List<DimentionEntity<string>>();
+            List<ElementsDimentions> parenDimentions = itemList.Where(w => w.ParentDimentionId == parentDimention).ToList();
+
+            foreach (var dimention in parenDimentions)
             {
-                item.GetType().GetProperties();
+                if (dimention.ParentDimentionId == null)
+                {
+                    internalRules = 1;
+                }
+                else
+                {
+                    internalRules++;
+                }
+
+                DimentionEntity<string> newDimention = new DimentionEntity<string>(dimention.RuleFilterTypeId, dimention.Value)
+                {
+                    DimentionColumn = dimention.DimentionTypeColumn,
+                    IsValid = false,
+                    ChildDimentions = DecorateDimentionEntity(itemList, dimention.DimensionId)
+                };
+
+                newDimention.DimentionsCount = internalRules;
+
+                listDimentionEntities.Add(newDimention);
             }
 
-            return new List<T>();
+            return listDimentionEntities;
         }
     }
 }

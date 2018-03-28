@@ -11,7 +11,9 @@ namespace RulesEngine.Entity
     public class DimentionEntity<T>
     {
         public string DimentionColumn { get; set; }
-        public double PercentageWeigth { get; set; }
+        public decimal PercentageWeigth { get; set; }
+        public int DimentionsCount { get; set; }
+        public bool IsValid { get; set; }
         public Evaluation Evaluator { get; }
 
         public List<DimentionEntity<T>> ChildDimentions { get; set; }
@@ -41,6 +43,10 @@ namespace RulesEngine.Entity
                 default:
                     throw new ApplicationException("Filter type not support");
             }
+        }
+
+        public DimentionEntity()
+        {
         }
     }
 }

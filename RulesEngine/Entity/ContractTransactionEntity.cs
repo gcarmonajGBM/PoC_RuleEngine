@@ -8,13 +8,12 @@ namespace RulesEngine.Entity
     public class ContractTransactionEntity : DtoTransactionIncome
     {
         public int CompanyId { get; set; }
-        private int ContractTypeId { get; set; }
-        private int AccountTypeId { get; set; }
-        private int PersonTypeId { get; set; }
-        private int TaxableEntityTypeId { get; set; }
-        private int NationalityId { get; set; }
-        private int AdendumId { get; set; }
-        private int ClientTypeId { get; set; }
-
+        public int ContractTypeId { get; set; }
+        public int AccountTypeId { get; set; }
+        public int PersonTypeId { get; set; }
+        public int TaxableEntityTypeId { get; set; }
+        public int NationalityId { get; set; }
+        public int AdendumId { get; set; }
+        public int ClientTypeId { get; set; }
     }
 }
