@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace RulesEngine.DTO
 {
     [DataContract]
-    class DtoTransactionIncome
+    public class DtoTransactionIncome
     {
         [DataMember]
         public Guid TransactionGuid { get; set; }

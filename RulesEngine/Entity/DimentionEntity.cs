@@ -8,14 +8,13 @@ using RulesEngine.Strategy.Concrete;
 
 namespace RulesEngine.Entity
 {
-    public class DimentionEntity
+    public class DimentionEntity<T>
     {
         public string DimentionColumn { get; set; }
         public double PercentageWeigth { get; set; }
         public Evaluation Evaluator { get; }
 
-        public List<DimentionEntity> ChildDimentions { get; set; }
-
+        public List<DimentionEntity<T>> ChildDimentions { get; set; }
 
         public DimentionEntity(int filterTypeId, object baseValue)
         {
@@ -25,7 +24,7 @@ namespace RulesEngine.Entity
                     Evaluator = new EqualsOf(baseValue);
                     break;
                 case (int)OperationsAviable.Contains:
-                    Evaluator = new ContainOf(baseValue);
+                    Evaluator = new ContainOf<T>(baseValue);
                     break;
                 case (int)OperationsAviable.GreaterEqual:
                     Evaluator = new RangeOf(baseValue);

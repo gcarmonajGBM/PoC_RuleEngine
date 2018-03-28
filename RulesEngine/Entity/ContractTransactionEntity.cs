@@ -5,7 +5,7 @@ using RulesEngine.DTO;
 
 namespace RulesEngine.Entity
 {
-    class ContractTransactionEntity : DtoTransactionIncome
+    public class ContractTransactionEntity : DtoTransactionIncome
     {
         public int CompanyId { get; set; }
         private int ContractTypeId { get; set; }
