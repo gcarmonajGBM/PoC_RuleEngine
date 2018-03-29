@@ -12,7 +12,7 @@ namespace UnitTestRulesEngine
         {
             int baseValue = 1;
             // Act
-            DimentionEntity<int> dimention = new DimentionEntity<int>((int)OperationsAviable.Equal, baseValue);
+            DimensionEntity<int> dimention = new DimensionEntity<int>((int)OperationsAviable.Equal, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(1));
@@ -23,7 +23,7 @@ namespace UnitTestRulesEngine
         {
             string baseValue = "1";
             // Act
-            DimentionEntity<string> dimention = new DimentionEntity<string>((int)OperationsAviable.Equal, baseValue);
+            DimensionEntity<string> dimention = new DimensionEntity<string>((int)OperationsAviable.Equal, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate("1"));
@@ -34,7 +34,7 @@ namespace UnitTestRulesEngine
         {
             double baseValue = 1.00;
             // Act
-            DimentionEntity<double> dimention = new DimentionEntity<double>((int)OperationsAviable.Equal, baseValue);
+            DimensionEntity<double> dimention = new DimensionEntity<double>((int)OperationsAviable.Equal, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(1.00));
@@ -45,7 +45,7 @@ namespace UnitTestRulesEngine
         {
             decimal baseValue = 1;
             // Act
-            DimentionEntity<decimal> dimention = new DimentionEntity<decimal>((int)OperationsAviable.Equal, baseValue);
+            DimensionEntity<decimal> dimention = new DimensionEntity<decimal>((int)OperationsAviable.Equal, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(1.00));
@@ -56,7 +56,7 @@ namespace UnitTestRulesEngine
         {
             string baseValue = "1";
             // Act
-            DimentionEntity<string> dimention = new DimentionEntity<string>((int)OperationsAviable.Equal, baseValue);
+            DimensionEntity<string> dimention = new DimensionEntity<string>((int)OperationsAviable.Equal, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(1.00));
@@ -67,7 +67,7 @@ namespace UnitTestRulesEngine
         {
             string baseValue = "uno";
             // Act
-            DimentionEntity<string> dimention = new DimentionEntity<string>((int)OperationsAviable.Equal, baseValue);
+            DimensionEntity<string> dimention = new DimensionEntity<string>((int)OperationsAviable.Equal, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(1.00));

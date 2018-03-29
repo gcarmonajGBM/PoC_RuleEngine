@@ -15,7 +15,7 @@ namespace UnitTestRulesEngine
             List<int> contrastValue = new List<int>() { 1, 4 };
 
             // Act
-            DimentionEntity<int> dimention = new DimentionEntity<int>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<int> dimention = new DimensionEntity<int>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(contrastValue));
@@ -28,7 +28,7 @@ namespace UnitTestRulesEngine
             List<int> contrastValue = new List<int>() { 7, 8 };
             
             // Act
-            DimentionEntity<int> dimention = new DimentionEntity<int>((int)OperationsAviable.Contains, baseValue);
+			DimensionEntity<int> dimention = new DimensionEntity<int>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));
@@ -41,7 +41,7 @@ namespace UnitTestRulesEngine
             List<string> contrastValue = new List<string>() { "1", "4" };
             
             // Act
-            DimentionEntity<string> dimention = new DimentionEntity<string>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<string> dimention = new DimensionEntity<string>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(contrastValue));
@@ -54,7 +54,7 @@ namespace UnitTestRulesEngine
             List<string> contrastValue = new List<string>() { "7", "8" };
             
             // Act
-            DimentionEntity<string> dimention = new DimentionEntity<string>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<string> dimention = new DimensionEntity<string>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));
@@ -67,7 +67,7 @@ namespace UnitTestRulesEngine
             List<double> contrastValue = new List<double>() { 1.00, 4.00 };
             
             // Act
-            DimentionEntity<double> dimention = new DimentionEntity<double>((int)OperationsAviable.Contains, baseValue);
+			DimensionEntity<double> dimention = new DimensionEntity<double>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsTrue(dimention.Evaluator.Evaluate(contrastValue));
@@ -80,7 +80,7 @@ namespace UnitTestRulesEngine
             List<double> contrastValue = new List<double>() { 7.00, 8.00 };
             
             // Act
-            DimentionEntity<double> dimention = new DimentionEntity<double>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<double> dimention = new DimensionEntity<double>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));
@@ -93,7 +93,7 @@ namespace UnitTestRulesEngine
             List<string> contrastValue = new List<string>() { "1", "4" };
 
             // Act
-            DimentionEntity<int> dimention = new DimentionEntity<int>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<int> dimention = new DimensionEntity<int>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));
@@ -106,12 +106,12 @@ namespace UnitTestRulesEngine
             List<int> contrastValue = new List<int>() { 1,4 };
 
             // Act
-            DimentionEntity<string> dimention = new DimentionEntity<string>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<string> dimention = new DimensionEntity<string>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));
         }
-
+         
         [TestMethod]
         public void WhenCompareListDistincTypesContainedValuesThenReturnTrue()
         {
@@ -119,12 +119,12 @@ namespace UnitTestRulesEngine
             List<string> contrastValue = new List<string>() { "1", "2" };
 
             // Act
-            DimentionEntity<int> dimention = new DimentionEntity<int>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<int> dimention = new DimensionEntity<int>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));
         }
-
+        
         [TestMethod]
         public void WhenCompareListDistincTypesNotContainedValuesThenReturnTrue()
         {
@@ -132,7 +132,7 @@ namespace UnitTestRulesEngine
             List<string> contrastValue = new List<string>() { "7", "8" };
             
             // Act
-            DimentionEntity<int> dimention = new DimentionEntity<int>((int)OperationsAviable.Contains, baseValue);
+            DimensionEntity<int> dimention = new DimensionEntity<int>((int)OperationsAviable.Contains, baseValue);
 
             // Assert
             Assert.IsFalse(dimention.Evaluator.Evaluate(contrastValue));

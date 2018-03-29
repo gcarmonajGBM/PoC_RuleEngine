@@ -17,7 +17,7 @@ namespace UnitTestRulesEngine
         {
             List<ElementsDimentions> resulSetDimentions = new List<ElementsDimentions>()
             {
-                new ElementsDimentions(){RuleId = 1,DimensionId= 1,ParentDimentionId= null,DimentionTypeColumn = "AccountTypeId",RuleFilterTypeId= 1,Value= "1"},
+                new ElementsDimentions(){RuleId = 1,DimensionId= 1,ParentDimentionId= null,DimentionTypeColumn = "AccountTypeIdIN",RuleFilterTypeId= 1,Value= "1"},
 
                 new ElementsDimentions(){RuleId = 2,DimensionId= 2,ParentDimentionId= null,DimentionTypeColumn = "AccountTypeId",RuleFilterTypeId= 1,Value= "2"},
 
@@ -188,7 +188,7 @@ namespace UnitTestRulesEngine
             var listToEval = createDimentionList();
             // Act
             Engine evaluator = new Engine();
-            List<DimentionEntity<string>> listDimentionEntity = evaluator.DecorateDimentionEntity(listToEval);
+            List<DimensionEntity<string>> listDimentionEntity = evaluator.DecorateDimentionEntity(listToEval);
 
             // Acert
             Assert.AreEqual(listToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
@@ -197,14 +197,16 @@ namespace UnitTestRulesEngine
         [TestMethod]
         public void WhenEvaluateDimentionList()
         {
-            var listToEval = createDimentionList();
+            var listDimensionToEval = createDimentionList();
+			var listTransactionToEval = CreateTransactionList();
             // Act
             Engine evaluator = new Engine();
-            List<DimentionEntity<string>> listDimentionEntity = evaluator.DecorateDimentionEntity(listToEval);
+			List<DimensionEntity<string>> listDimentionEntity = evaluator.DecorateDimentionEntity(listDimensionToEval);
 
-
-            // Acert
-            Assert.AreEqual(listToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
+			listTransactionToEval.ForEach(F => listDimentionEntity.ForEach(f => f.EvaluateDimensions(F, f)));
+                    
+			// Acert
+			Assert.AreEqual(listDimensionToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
         }
     }
 }

@@ -8,17 +8,22 @@ using RulesEngine.Strategy.Concrete;
 
 namespace RulesEngine.Entity
 {
-    public class DimentionEntity<T>
+    public class DimensionEntity<T>
     {
-        public string DimentionColumn { get; set; }
+		public Evaluation Evaluator { get; }
+
+		public string DimensionColumn { get; set; }
         public decimal PercentageWeigth { get; set; }
-        public int DimentionsCount { get; set; }
-        public bool IsValid { get; set; }
-        public Evaluation Evaluator { get; }
+        public int DimensionsCount { get; set; }
+        public bool IsValidDimension { get; set; }
+        public List<DimensionEntity<T>> ChildDimensions { get; set; }
 
-        public List<DimentionEntity<T>> ChildDimentions { get; set; }
-
-        public DimentionEntity(int filterTypeId, object baseValue)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:RulesEngine.Entity.DimensionEntity`1"/> class.
+        /// </summary>
+        /// <param name="filterTypeId">Filter type identifier.</param>
+        /// <param name="baseValue">Base value.</param>
+		public DimensionEntity(int filterTypeId, object baseValue)
         {
             switch (filterTypeId)
             {
@@ -45,8 +50,30 @@ namespace RulesEngine.Entity
             }
         }
 
-        public DimentionEntity()
-        {
-        }
+		public decimal EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension)
+		{
+			var property = transactionToEval.GetType().GetProperty(dimension.DimensionColumn);
+
+			if (property != null)
+			{
+				var propertyValue = property.GetValue(transactionToEval);
+                dimension.IsValidDimension = dimension.Evaluator.Evaluate(propertyValue.ToString());
+			}
+			else
+			{
+				Console.WriteLine("Configured property " + dimension.DimensionColumn + " don't finded.");
+			}
+
+			if (dimension.ChildDimensions.Count > 0)
+			{
+				foreach (var childDimention in dimension.ChildDimensions)
+				{
+					EvaluateDimensions(transactionToEval, childDimention);
+				}
+
+			}
+
+			return new decimal();
+		}
     }
 }

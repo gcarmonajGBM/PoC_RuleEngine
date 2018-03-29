@@ -33,9 +33,9 @@ namespace RulesEngine
 
         }
 
-        public List<DimentionEntity<string>> DecorateDimentionEntity(List<ElementsDimentions> itemList, long? parentDimention = null)
+        public List<DimensionEntity<string>> DecorateDimentionEntity(List<ElementsDimentions> itemList, long? parentDimention = null)
         {
-            List<DimentionEntity<string>> listDimentionEntities = new List<DimentionEntity<string>>();
+            List<DimensionEntity<string>> listDimentionEntities = new List<DimensionEntity<string>>();
             List<ElementsDimentions> parenDimentions = itemList.Where(w => w.ParentDimentionId == parentDimention).ToList();
 
             foreach (var dimention in parenDimentions)
@@ -49,14 +49,14 @@ namespace RulesEngine
                     internalRules++;
                 }
 
-                DimentionEntity<string> newDimention = new DimentionEntity<string>(dimention.RuleFilterTypeId, dimention.Value)
+                DimensionEntity<string> newDimention = new DimensionEntity<string>(dimention.RuleFilterTypeId, dimention.Value)
                 {
-                    DimentionColumn = dimention.DimentionTypeColumn,
-                    IsValid = false,
-                    ChildDimentions = DecorateDimentionEntity(itemList, dimention.DimensionId)
+                    DimensionColumn = dimention.DimentionTypeColumn,
+                    IsValidDimension = false,
+                    ChildDimensions = DecorateDimentionEntity(itemList, dimention.DimensionId)
                 };
 
-                newDimention.DimentionsCount = internalRules;
+                newDimention.DimensionsCount = internalRules;
 
                 listDimentionEntities.Add(newDimention);
             }
