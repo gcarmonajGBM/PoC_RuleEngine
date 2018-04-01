@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Serialization;
 using RulesEngine;
 using RulesEngine.Entity;
 
@@ -13,11 +11,14 @@ namespace UnitTestRulesEngine
     [TestClass]
     public class UnitTestDimentions
     {
+		Engine evaluator = new Engine();
+		List<DimensionEntity<string>> listDimentionEntity;
+
         public List<ElementsDimentions> createDimentionList()
         {
             List<ElementsDimentions> resulSetDimentions = new List<ElementsDimentions>()
             {
-                new ElementsDimentions(){RuleId = 1,DimensionId= 1,ParentDimentionId= null,DimentionTypeColumn = "AccountTypeIdIN",RuleFilterTypeId= 1,Value= "1"},
+                new ElementsDimentions(){RuleId = 1,DimensionId= 1,ParentDimentionId= null,DimentionTypeColumn = "AccountTypeId",RuleFilterTypeId= 1,Value= "1"},
 
                 new ElementsDimentions(){RuleId = 2,DimensionId= 2,ParentDimentionId= null,DimentionTypeColumn = "AccountTypeId",RuleFilterTypeId= 1,Value= "2"},
 
@@ -175,6 +176,36 @@ namespace UnitTestRulesEngine
                     TaxableEntityTypeId = 1,
                     NationalityId = 1,
                     AdendumId = 1,
+                    ClientTypeId = 1},
+				new ContractTransactionEntity() {
+                    TransactionGuid = new Guid(),
+                    SubAccountId = 1,
+                    TradingLineId = 1,
+                    TransactionTypeId = 1,
+                    CustodyTypeId = 1,
+                    CustodianPartyId = 1,
+                    CompanyId = 1,
+                    ContractTypeId = 1,
+                    AccountTypeId = 1,
+                    PersonTypeId = 1,
+                    TaxableEntityTypeId = 1,
+                    NationalityId = 1,
+                    AdendumId = 1,
+                    ClientTypeId = 1},
+                new ContractTransactionEntity() {
+                    TransactionGuid = new Guid(),
+                    SubAccountId = 1,
+                    TradingLineId = 1,
+                    TransactionTypeId = 1,
+                    CustodyTypeId = 1,
+                    CustodianPartyId = 1,
+                    CompanyId = 1,
+                    ContractTypeId = 1,
+                    AccountTypeId = 1,
+                    PersonTypeId = 1,
+                    TaxableEntityTypeId = 1,
+                    NationalityId = 1,
+                    AdendumId = 1,
                     ClientTypeId = 1}
             };
 
@@ -183,28 +214,31 @@ namespace UnitTestRulesEngine
 
 
         [TestMethod]
-        public void WhenHaveListDimentionsThenHaveRuleDimentionObject()
+        public void A_WhenHaveListDimentionsThenHaveRuleDimentionObject()
         {
             var listToEval = createDimentionList();
             // Act
-            Engine evaluator = new Engine();
-            List<DimensionEntity<string>> listDimentionEntity = evaluator.DecorateDimentionEntity(listToEval);
+            // Engine evaluator = new Engine();
+			listDimentionEntity = evaluator.DecorateDimentionEntity(listToEval);
 
             // Acert
             Assert.AreEqual(listToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
         }
 
         [TestMethod]
-        public void WhenEvaluateDimentionList()
+        public void B_WhenEvaluateDimentionList()
         {
             var listDimensionToEval = createDimentionList();
 			var listTransactionToEval = CreateTransactionList();
-            // Act
-            Engine evaluator = new Engine();
-			List<DimensionEntity<string>> listDimentionEntity = evaluator.DecorateDimentionEntity(listDimensionToEval);
+			// Act
 
-			listTransactionToEval.ForEach(F => listDimentionEntity.ForEach(f => f.EvaluateDimensions(F, f)));
+			Console.WriteLine(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture));
+			listDimentionEntity = evaluator.DecorateDimentionEntity(listDimensionToEval);
+            
+			Console.WriteLine(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture));
+			listTransactionToEval.ForEach(F => listDimentionEntity.ForEach(f => f.EvaluateDimensions(F, f, (decimal)100/f.DimensionsCount)));
                     
+			Console.WriteLine(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff", CultureInfo.InvariantCulture));
 			// Acert
 			Assert.AreEqual(listDimensionToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
         }

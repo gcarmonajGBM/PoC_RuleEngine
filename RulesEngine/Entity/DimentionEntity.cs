@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using RulesEngine.Enums;
 using RulesEngine.Strategy.Abstract;
 using RulesEngine.Strategy.Concrete;
@@ -13,11 +11,11 @@ namespace RulesEngine.Entity
 		public Evaluation Evaluator { get; }
 
 		public string DimensionColumn { get; set; }
-        public decimal PercentageWeigth { get; set; }
+        public decimal CompliancePercentage { get; set; }
         public int DimensionsCount { get; set; }
         public bool IsValidDimension { get; set; }
         public List<DimensionEntity<T>> ChildDimensions { get; set; }
-
+              
         /// <summary>
         /// Initializes a new instance of the <see cref="T:RulesEngine.Entity.DimensionEntity`1"/> class.
         /// </summary>
@@ -50,7 +48,7 @@ namespace RulesEngine.Entity
             }
         }
 
-		public decimal EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension)
+		public decimal EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension, decimal percentagevalue)
 		{
 			var property = transactionToEval.GetType().GetProperty(dimension.DimensionColumn);
 
@@ -58,6 +56,7 @@ namespace RulesEngine.Entity
 			{
 				var propertyValue = property.GetValue(transactionToEval);
                 dimension.IsValidDimension = dimension.Evaluator.Evaluate(propertyValue.ToString());
+				CompliancePercentage = dimension.IsValidDimension ? CompliancePercentage+percentagevalue:CompliancePercentage;
 			}
 			else
 			{
@@ -68,7 +67,7 @@ namespace RulesEngine.Entity
 			{
 				foreach (var childDimention in dimension.ChildDimensions)
 				{
-					EvaluateDimensions(transactionToEval, childDimention);
+					EvaluateDimensions(transactionToEval, childDimention, percentagevalue);
 				}
 
 			}
