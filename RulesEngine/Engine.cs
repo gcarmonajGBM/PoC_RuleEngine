@@ -47,6 +47,7 @@ namespace RulesEngine
                 {
                     DimensionColumn = dimention.DimentionTypeColumn,
                     IsValidDimension = false,
+                    RuleValue = dimention.RuleValue.ToString().Trim(),
                     ChildDimensions = DecorateDimentionEntity(itemList, dimention.DimensionId)
                 };
 

@@ -7,6 +7,8 @@ namespace RulesEngine.Entity
     public class ElementsDimentions
     {
         public long RuleId { get; set; }
+
+        public long RuleValue { get; set; }
         public long DimensionId { get; set; }
         public long? ParentDimentionId { get; set; }
         public string DimentionTypeColumn { get; set; }

@@ -12,7 +12,7 @@ namespace RulesEngine.Entity
         public int AccountTypeId { get; set; }
         public int PersonTypeId { get; set; }
         public int TaxableEntityTypeId { get; set; }
-        public int NationalityId { get; set; }
+        public string NationalityId { get; set; }
         public int AdendumId { get; set; }
         public int ClientTypeId { get; set; }
     }

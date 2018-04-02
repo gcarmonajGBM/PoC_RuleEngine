@@ -10,7 +10,8 @@ namespace RulesEngine.Entity
     {
 		public Evaluation Evaluator { get; }
 
-		public string DimensionColumn { get; set; }
+        public string RuleValue { get; set; }
+        public string DimensionColumn { get; set; }
         public decimal CompliancePercentage { get; set; }
         public int DimensionsCount { get; set; }
         public bool IsValidDimension { get; set; }
@@ -48,10 +49,15 @@ namespace RulesEngine.Entity
             }
         }
 
-		public decimal EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension, decimal percentagevalue)
+		public decimal EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension, decimal percentagevalue, bool isparentEval = false)
 		{
 			var property = transactionToEval.GetType().GetProperty(dimension.DimensionColumn);
 
+		    if (isparentEval)
+		    {
+		        CompliancePercentage = 0;
+		    }
+            
 			if (property != null)
 			{
 				var propertyValue = property.GetValue(transactionToEval);
