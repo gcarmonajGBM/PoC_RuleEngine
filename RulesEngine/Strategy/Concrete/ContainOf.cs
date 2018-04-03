@@ -19,7 +19,16 @@ namespace RulesEngine.Strategy.Concrete
         {
             try
             {
-                bool boolenValue = ((IEnumerable<TU>)baseValue.ToString().Split(",").AsEnumerable()).Intersect((IEnumerable<TU>)contrastValue.ToString().Split(",").AsEnumerable()).Any();
+                bool boolenValue;
+
+                if (baseValue.ToString().Contains(","))
+                {
+                    boolenValue = ((IEnumerable<TU>)baseValue.ToString().Split(",").AsEnumerable()).Intersect((IEnumerable<TU>)contrastValue.ToString().Split(",").AsEnumerable()).Any();
+                }
+                else
+                {
+                    boolenValue = ((IEnumerable<TU>)baseValue).Intersect((IEnumerable<TU>)contrastValue).Any();
+                }
 
                 return boolenValue;
             }

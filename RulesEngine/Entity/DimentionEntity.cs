@@ -32,24 +32,12 @@ namespace RulesEngine.Entity
                 case (int)OperationsAviable.Contains:
                     Evaluator = new ContainOf<T>(baseValue);
                     break;
-                case (int)OperationsAviable.GreaterEqual:
-                    Evaluator = new RangeOf(baseValue);
-                    break;
-                case (int)OperationsAviable.LessEqual:
-                    Evaluator = new RangeOf(baseValue);
-                    break;
-                case (int)OperationsAviable.Between:
-                    Evaluator = new BetweenOf(baseValue);
-                    break;
-                case (int)OperationsAviable.Distinct:
-                    Evaluator = new DistinctOf(baseValue);
-                    break;
                 default:
                     throw new ApplicationException("Filter type not support");
             }
         }
 
-		public decimal EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension, decimal percentagevalue, bool isparentEval = false)
+		public void EvaluateDimensions(ContractTransactionEntity transactionToEval, DimensionEntity<string> dimension, decimal percentagevalue, bool isparentEval = false)
 		{
 			var property = transactionToEval.GetType().GetProperty(dimension.DimensionColumn);
 
@@ -77,8 +65,6 @@ namespace RulesEngine.Entity
 				}
 
 			}
-
-			return new decimal();
 		}
     }
 }

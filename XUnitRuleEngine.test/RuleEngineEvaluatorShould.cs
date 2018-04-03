@@ -1,16 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RulesEngine;
 using RulesEngine.Entity;
+using Xunit;
 
-namespace UnitTestRulesEngine
+namespace XUnitRuleEngine.test
 {
-    [TestClass]
-    public class UnitTestDimentions
+    public class RuleEngineEvaluatorShould
     {
         Engine evaluator = new Engine();
         List<DimensionEntity<string>> listDimentionEntity;
@@ -224,7 +221,28 @@ namespace UnitTestRulesEngine
             return resulSetDimentions;
         }
 
-        [TestMethod,TestInitialize()]
+
+        [Fact]
+        public void AvaregeResponseTime_1700Requests()
+        {
+            var allResponseTimes = new List<(DateTime Start, DateTime End)>();
+            Initialize();
+
+            for (int i = 0; i < 1700; i++)
+            {
+                var start = DateTime.Now;
+                EvaluateLists();
+                var end = DateTime.Now;
+
+                allResponseTimes.Add((start, end));
+            }
+
+            var expected = 1;
+            var actual = (int)allResponseTimes.Select(r => (r.End - r.Start).TotalMilliseconds).Average();
+            Console.WriteLine(actual);
+            Assert.True(actual <= expected, $"Expected average response time of less than or equal to {expected} ms but was {actual} ms.");
+        }
+
         public void Initialize()
         {
             listDimensionToEval = createDimentionList();
@@ -233,27 +251,17 @@ namespace UnitTestRulesEngine
             listDimentionEntity = evaluator.DecorateDimentionEntity(listDimensionToEval);
         }
 
-        [TestMethod]
-        public void A_WhenHaveListDimentionsThenHaveRuleDimentionObject()
+        public void EvaluateLists()
         {
-            // Acert
-            Assert.AreEqual(listDimensionToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
-        }
 
-        [TestMethod]
-        public void B_WhenEvaluateDimentionList()
-        {
             listTransactionToEval.ForEach(F => listDimentionEntity.ForEach(f =>
             {
-                f.EvaluateDimensions(F, f, (decimal) 100 / f.DimensionsCount, true);
+                f.EvaluateDimensions(F, f, (decimal)100 / f.DimensionsCount, true);
                 if (f.CompliancePercentage == 100)
                 {
-                    Console.WriteLine("Rule Cumplish with value " + f.RuleValue + " for GUID " + F.TransactionGuid);
+                    Console.WriteLine("Rule Cumplish with value " + f.RuleValue + " for GUID " + F.TransactionGuid + " and AccountTypeId " + F.AccountTypeId);
                 }
             }));
-    
-            // Acert
-            Assert.AreEqual(listDimensionToEval.Count(w => w.ParentDimentionId == null), listDimentionEntity.Count());
         }
     }
 }
