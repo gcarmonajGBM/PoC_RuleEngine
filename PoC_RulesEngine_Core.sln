@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAndLoadTestProject", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitRuleEngine.test", "XUnitRuleEngine.test\XUnitRuleEngine.test.csproj", "{10F94151-76BC-443A-8552-E246BA4E5ACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{04D62402-57A4-4041-8BD8-BFA6E751D470}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{10F94151-76BC-443A-8552-E246BA4E5ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10F94151-76BC-443A-8552-E246BA4E5ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10F94151-76BC-443A-8552-E246BA4E5ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D62402-57A4-4041-8BD8-BFA6E751D470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D62402-57A4-4041-8BD8-BFA6E751D470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D62402-57A4-4041-8BD8-BFA6E751D470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D62402-57A4-4041-8BD8-BFA6E751D470}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
